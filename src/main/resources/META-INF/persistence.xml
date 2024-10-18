@@ -4,27 +4,28 @@
              version="2.0">
 
     <!-- Unidad de Persistencia -->
-    <persistence-unit name="" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="configMYSQL" transaction-type="RESOURCE_LOCAL">
 
         <!-- Qué clases queremos mapear -->
-        <class></class>
-        <class></class>
-        <class></class>
+        <class>com.es.stockcontrol.model.Producto</class>
+        <class>com.es.stockcontrol.model.Proveedor</class>
+        <class>com.es.stockcontrol.model.User</class>
 
         <properties>
             <!-- Qué BDD usar -->
-            <property name="javax.persistence.jdbc.driver" value="" />
-            <!-- Dónde está la BASE DE DATOS --> <!-- jdbc:mysql://ip:puerto/nombre_base_de_datos -->
-            <property name="javax.persistence.jdbc.url" value="" />
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <!-- Dónde está la BASE DE DATOS -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stockcontroldb" />
             <!-- Credenciales -->
-            <property name="javax.persistence.jdbc.user" value="" />
+            <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="" />
 
-            <!-- Qué lenguaje de BDD se usa -->
-            <property name="hibernate.dialect" value="" />
-            <property name="hibernate.show_sql" value="" />
+            <!-- Qué lenguaje de BBDD se usa -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <!-- Muestra las consultas SQL de Hibernate por consola -->
+            <property name="hibernate.show_sql" value="true" />
             <!-- ¿Qué pasa cuando inicio la aplicación? -->
-            <property name="hibernate.hbm2ddl.auto" value=""/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
 
     </persistence-unit>
