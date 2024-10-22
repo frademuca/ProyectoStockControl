@@ -1,13 +1,13 @@
 package com.es.stockcontrol.repository;
 
 import com.es.stockcontrol.model.Producto;
-import com.es.stockcontrol.model.User;
 import com.es.stockcontrol.utils.HibernateUtil;
 import jakarta.persistence.EntityManager;
 
 // plantilleado todo con UserRepository
 public class ProductoRepository {
     public EntityManager getEntityManager() {
+        // esto igual o que???????????????????????????????????????????????????????????????????????????????????????????
         return HibernateUtil.getEntityManager("NAME_PERSISTENCE_UNIT");
     }
     public void closeEntityManager(EntityManager em) {
@@ -51,31 +51,21 @@ public class ProductoRepository {
     }
 
     // U
-    public boolean update(String id, String newName, String newPassword){
+    public Producto update (Producto nuevoProducto){
         EntityManager em = getEntityManager();
-        boolean isUpdated = false;
         try {
             em.getTransaction().begin(); // Iniciar la transacción
-            User existingUser = read(id);
 
-            if (existingUser != null) {
-                // Actualizar los campos del usuario
-                existingUser.setNombre_usuario(newName); // Cambiar el nombre
-                existingUser.setPassword(newPassword); // Cambiar la password
-
-                em.merge(existingUser); // Persistir los cambios en la base de datos
-                em.getTransaction().commit(); // Confirmar la transacción
-                isUpdated = true;
-            } else {
-                System.out.println("Usuario no encontrado con el ID: " + id);
-            }
+            em.merge(nuevoProducto); // Persistir los cambios en la base de datos
+            em.getTransaction().commit(); // Confirmar la transacción
+            return nuevoProducto;
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
             e.printStackTrace(); // Mostrar el error en la consola para depuración
         } finally {
             em.close(); // Cerrar el EntityManager
         }
-        return isUpdated;
+        return null;
     }
 
     // D
@@ -85,14 +75,14 @@ public class ProductoRepository {
         try {
             em.getTransaction().begin(); // Iniciar la transacción
 
-            User existingUser = read(id);
+            Producto existingProducto = read(id);
 
-            if (existingUser != null) {
-                em.remove(existingUser); // Eliminar la entidad si se encontró
+            if (existingProducto != null) {
+                em.remove(existingProducto); // Eliminar la entidad si se encontró
                 em.getTransaction().commit(); // Confirmar la transacción
                 isDeleted = true; // Marcar como eliminado si la transacción es exitosa
             } else {
-                System.out.println("Usuario no encontrado con el ID: " + id);
+                System.out.println("Producto no encontrado con el ID: " + id);
             }
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
