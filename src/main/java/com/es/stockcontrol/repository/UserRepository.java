@@ -48,32 +48,34 @@ public class UserRepository {
     }
 
     // U
-    public boolean update(String id, String newName, String newPassword){
-        EntityManager em = getEntityManager();
-        boolean isUpdated = false;
-        try {
-            em.getTransaction().begin(); // Iniciar la transacción
-            User existingUser = read(id);
-
-            if (existingUser != null) {
-                // Actualizar los campos del usuario
-                existingUser.setNombreUsuario(newName); // Cambiar el nombre
-                existingUser.setPassword(newPassword); // Cambiar la password
-
-                em.merge(existingUser); // Persistir los cambios en la base de datos
-                em.getTransaction().commit(); // Confirmar la transacción
-                isUpdated = true;
-            } else {
-                System.out.println("Usuario no encontrado con el ID: " + id);
-            }
-        } catch (Exception e) {
-            em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
-            e.printStackTrace(); // Mostrar el error en la consola para depuración
-        } finally {
-            em.close(); // Cerrar el EntityManager
-        }
-        return isUpdated;
-    }
+    // no hace falta el user, de todas formas se haría pasando un usuario nuevo por parametros y ya esta
+    // de la logica se encargaria el service (el que lee, comprueba, llama al update del repository)
+//    public boolean update(String id, String newName, String newPassword){
+//        EntityManager em = getEntityManager();
+//        boolean isUpdated = false;
+//        try {
+//            em.getTransaction().begin(); // Iniciar la transacción
+//            User existingUser = read(id);
+//
+//            if (existingUser != null) {
+//                // Actualizar los campos del usuario
+//                existingUser.setNombreUsuario(newName); // Cambiar el nombre
+//                existingUser.setPassword(newPassword); // Cambiar la password
+//
+//                em.merge(existingUser); // Persistir los cambios en la base de datos
+//                em.getTransaction().commit(); // Confirmar la transacción
+//                isUpdated = true;
+//            } else {
+//                System.out.println("Usuario no encontrado con el ID: " + id);
+//            }
+//        } catch (Exception e) {
+//            em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
+//            e.printStackTrace(); // Mostrar el error en la consola para depuración
+//        } finally {
+//            em.close(); // Cerrar el EntityManager
+//        }
+//        return isUpdated;
+//    }
 
     // D
     public boolean delete(String id) {

@@ -21,7 +21,7 @@ public class Proveedor {
 
     @OneToMany
     @JoinColumn(name = "productos")
-    private List<Producto> employees;
+    private List<Producto> productos;
 
 
     public Proveedor() {}
@@ -51,11 +51,11 @@ public class Proveedor {
         this.direccion = direccion;
     }
 
-    public List<Producto> getEmployees() {
-        return employees;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setEmployees(List<Producto> employees) {
-        this.employees = employees;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }
