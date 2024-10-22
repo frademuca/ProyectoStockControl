@@ -18,6 +18,11 @@ public class RespuestaHTTP<T> {
         this.obj = obj;
     }
 
+    public RespuestaHTTP(int codigo, String mensaje) {
+        this.codigo = codigo;
+        this.mensaje = mensaje;
+    }
+
     public RespuestaHTTP() {
 
     }

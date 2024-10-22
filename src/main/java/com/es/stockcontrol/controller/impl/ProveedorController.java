@@ -8,7 +8,8 @@ import java.util.List;
 
 public class ProveedorController implements ProveedorControllerAPI {
     @Override
-    public RespuestaHTTP<List<Proveedor>> getProveedoresProducto(String idProducto) {
+    public RespuestaHTTP<List<Proveedor>> getProveedoresProducto(String id) {
+
         return null;
     }
 
