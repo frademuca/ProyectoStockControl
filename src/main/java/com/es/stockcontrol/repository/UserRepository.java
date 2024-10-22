@@ -57,7 +57,7 @@ public class UserRepository {
 
             if (existingUser != null) {
                 // Actualizar los campos del usuario
-                existingUser.setNombre_usuario(newName); // Cambiar el nombre
+                existingUser.setNombreUsuario(newName); // Cambiar el nombre
                 existingUser.setPassword(newPassword); // Cambiar la password
 
                 em.merge(existingUser); // Persistir los cambios en la base de datos
