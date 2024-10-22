@@ -28,6 +28,7 @@ public class Producto {
     private float precioConIva;
 
     @Column(name="fecha_alta", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date fechaAlta;
 
     @Column(name="stock")
