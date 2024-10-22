@@ -9,8 +9,6 @@ public class UserService {
 
     public boolean login(String username, String password) {
 
-        username = empty();
-
         // 1º Obtener el usuario de la base de datos
         User user = new User();
         UserRepository userRepository = new UserRepository();
