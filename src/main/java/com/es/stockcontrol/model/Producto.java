@@ -1,17 +1,41 @@
 package com.es.stockcontrol.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
+@Table(name = "productos")
 public class Producto {
 
+    @Id
+    @Column(name = "id")
     private String id;
+
+    @Column(name = "categoria", length = 10, nullable = false)
     private String categoria;
+
+    @Column(name = "nombre", length = 50, nullable = false)
     private String nombre;
+
+    @Column(name ="descripcion")
     private String descripcion;
-    private float precio_sin_iva;
-    private float precio_con_iva;
-    private Date fecha_alta;
+
+    @Column(name="precio_sin_iva", nullable = false)
+    private float precioSinIva;
+
+    @Column(name="precio_con_iva", nullable = false)
+    private float precioConIva;
+
+    @Column(name="fecha_alta", nullable = false)
+    private Date fechaAlta;
+
+    @Column(name="stock")
     private int stock;
+
+    @ManyToOne
+    @JoinColumn(name = "proveedor")
+    private Proveedor proveedor;
 
 
     public Producto() {}
@@ -49,28 +73,28 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public float getPrecio_sin_iva() {
-        return precio_sin_iva;
+    public float getPrecioSinIva() {
+        return precioSinIva;
     }
 
-    public void setPrecio_sin_iva(float precio_sin_iva) {
-        this.precio_sin_iva = precio_sin_iva;
+    public void setPrecioSinIva(float precioSinIva) {
+        this.precioSinIva = precioSinIva;
     }
 
-    public float getPrecio_con_iva() {
-        return precio_con_iva;
+    public float getPrecioConIva() {
+        return precioConIva;
     }
 
-    public void setPrecio_con_iva(float precio_con_iva) {
-        this.precio_con_iva = precio_con_iva;
+    public void setPrecioConIva(float precioConIva) {
+        this.precioConIva = precioConIva;
     }
 
-    public Date getFecha_alta() {
-        return fecha_alta;
+    public Date getFechaAlta() {
+        return fechaAlta;
     }
 
-    public void setFecha_alta(Date fecha_alta) {
-        this.fecha_alta = fecha_alta;
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
     }
 
     public int getStock() {
@@ -79,5 +103,13 @@ public class Producto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 }

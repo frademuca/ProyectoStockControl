@@ -1,24 +1,35 @@
 package com.es.stockcontrol.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "usuarios")
 public class User {
 
-    private String nombre_usuario;
+    @Id
+    @Column(name = "nombre_usuario")
+    private String nombreUsuario;
+
+    @Column(name = "password", length = 20, nullable = false)
     private String password;
 
 
     public User(){}
 
-    public User(String nombre_usuario, String password) {
-        this.nombre_usuario = nombre_usuario;
+    public User(String nombreUsuario, String password) {
+        this.nombreUsuario = nombreUsuario;
         this.password = password;
     }
 
-    public String getNombre_usuario() {
-        return nombre_usuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setNombre_usuario(String nombre_usuario) {
-        this.nombre_usuario = nombre_usuario;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getPassword() {

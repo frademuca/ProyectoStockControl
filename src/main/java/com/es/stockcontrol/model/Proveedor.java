@@ -1,10 +1,27 @@
 package com.es.stockcontrol.model;
 
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "proveedores")
 public class Proveedor {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
+
+    @Column(name = "nombre", length = 50, nullable = false, unique = true)
     private String nombre;
+
+    @Column(name = "direccion", nullable = false)
     private String direccion;
+
+    @OneToMany
+    @JoinColumn(name = "productos")
+    private List<Producto> employees;
 
 
     public Proveedor() {}
@@ -32,5 +49,13 @@ public class Proveedor {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public List<Producto> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Producto> employees) {
+        this.employees = employees;
     }
 }
