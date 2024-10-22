@@ -13,20 +13,23 @@ public class UserRepository {
     }
 
     // C
-    public User create(User user){
+    public boolean create(User user) {
         EntityManager em = getEntityManager();
+        boolean isCreated = false; // Variable para indicar si la creación fue exitosa
         try {
             em.getTransaction().begin(); // Iniciar la transacción
             em.persist(user); // Guardar la entidad en la base de datos
             em.getTransaction().commit(); // Confirmar la transacción
+            isCreated = true; // Si se llega aquí, la operación fue exitosa
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
             e.printStackTrace(); // Mostrar el error en la consola para depuración
         } finally {
             em.close(); // Cerrar el EntityManager
         }
-        return user;
+        return isCreated; // Devolver true si la creación fue exitosa, false si hubo error
     }
+
     // R
     public User read(String id) {
         EntityManager em = getEntityManager();
@@ -72,7 +75,7 @@ public class UserRepository {
         return existingUser; // Devolver el usuario actualizado o null si no se encontró
     }
 
-//    public boolean delete(String id){
-//
-//    }
+    public boolean delete(String id){
+
+    }
 }
