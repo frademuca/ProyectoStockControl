@@ -4,7 +4,6 @@ import com.es.stockcontrol.model.Producto;
 import com.es.stockcontrol.utils.HibernateUtil;
 import jakarta.persistence.EntityManager;
 
-// plantilleado todo con UserRepository
 public class ProductoRepository {
     public EntityManager getEntityManager() {
         return HibernateUtil.getEntityManager("NAME_PERSISTENCE_UNIT");
