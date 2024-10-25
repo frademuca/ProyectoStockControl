@@ -30,8 +30,8 @@ public class ProveedorRespository {
         return isCreated; // Devolver true si la creación fue exitosa, false si hubo error
     }
 
-    // R
-    public Proveedor read(String id) {
+    // R x id
+    public Proveedor read(long id) {
         EntityManager em = getEntityManager();
         Proveedor proveedor = null;
         try {
@@ -46,12 +46,31 @@ public class ProveedorRespository {
         }
         return proveedor; // Devolver el objeto Proveedor encontrado, o null si no se encontró
     }
+    // R x nombre
+    public Proveedor read(String nombre) {
+        EntityManager em = getEntityManager();
+        Proveedor proveedor = null;
+        try {
+            em.getTransaction().begin(); // Iniciar la transacción
+            proveedor = em.find(Proveedor.class, nombre); // Buscar la entidad por su ID
+            em.getTransaction().commit(); // Confirmar la transacción
+        } catch (Exception e) {
+            em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
+            e.printStackTrace(); // Mostrar el error en la consola para depuración
+        } finally {
+            em.close(); // Cerrar el EntityManager
+        }
+        return proveedor; // Devolver el objeto Proveedor encontrado, o null si no se encontró
+    }
 
-    // U, no hace falta en repository, solo en service parece
+    // U
+    public boolean update(Proveedor proveedor){
+
+    }
 
 
     // D
-    public boolean delete(String id) {
+    public boolean delete(long id) {
         EntityManager em = getEntityManager();
         boolean isDeleted = false;
         try {
