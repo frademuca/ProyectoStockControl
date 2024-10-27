@@ -64,7 +64,7 @@ public class ProveedorRespository {
     }
 
     // U
-    public boolean update(Proveedor proveedor){
+    public Proveedor update(Proveedor proveedor){
 
     }
 
