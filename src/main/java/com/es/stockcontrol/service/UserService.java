@@ -4,8 +4,6 @@ import com.es.stockcontrol.model.User;
 import com.es.stockcontrol.repository.UserRepository;
 import com.es.stockcontrol.utils.Validator;
 
-import static java.util.Optional.empty;
-
 public class UserService {
 
     public boolean login(String username, String password) {
