@@ -14,21 +14,20 @@ public class ProductoRepository {
 
     // C
     // ya se encargaran de mandarmelo con los datos desde otras capas
-    public boolean create(Producto producto) {
+    public Producto create(Producto producto) {
         EntityManager em = getEntityManager();
-        boolean isCreated = false; // Variable para indicar si la creación fue exitosa
         try {
             em.getTransaction().begin(); // Iniciar la transacción
             em.persist(producto); // Guardar la entidad en la base de datos
             em.getTransaction().commit(); // Confirmar la transacción
-            isCreated = true; // Si se llega aquí, la operación fue exitosa
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
             e.printStackTrace(); // Mostrar el error en la consola para depuración
+            return null;
         } finally {
             em.close(); // Cerrar el EntityManager
         }
-        return isCreated; // Devolver true si la creación fue exitosa, false si hubo error
+        return producto; // Devolver true si la creación fue exitosa, false si hubo error
     }
 
     // R
@@ -49,21 +48,20 @@ public class ProductoRepository {
     }
 
     // U
-    public Producto update (Producto nuevoProducto){
+    public Producto update (Producto producto){
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin(); // Iniciar la transacción
-
-            em.merge(nuevoProducto); // Persistir los cambios en la base de datos
+            em.merge(producto); // Persistir los cambios en la base de datos
             em.getTransaction().commit(); // Confirmar la transacción
-            return nuevoProducto;
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
             e.printStackTrace(); // Mostrar el error en la consola para depuración
+            return null;
         } finally {
             em.close(); // Cerrar el EntityManager
         }
-        return null;
+        return producto;
     }
 
     // D

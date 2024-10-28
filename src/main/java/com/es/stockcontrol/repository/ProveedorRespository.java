@@ -51,7 +51,9 @@ public class ProveedorRespository {
         Proveedor proveedor = null;
         try {
             em.getTransaction().begin(); // Iniciar la transacción
-            proveedor = em.find(Proveedor.class, nombre); // Buscar la entidad por su ID
+            proveedor = em.createQuery("SELECT p FROM Proveedor p WHERE p.nombre = :nombre", Proveedor.class)
+                    .setParameter("nombre", nombre)
+                    .getSingleResult(); // Buscar el proveedor por nombre
             em.getTransaction().commit(); // Confirmar la transacción
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
@@ -63,7 +65,21 @@ public class ProveedorRespository {
     }
 
     // U
-    //No hace falta en el repository, se debe hacer desde el service
+    public Proveedor update(Proveedor proveedor) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(proveedor); // Actualizar la entidad en la base de datos
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+        return proveedor;
+    }
 
     // D
     public boolean delete(long id) {

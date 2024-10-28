@@ -47,7 +47,21 @@ public class UserRepository {
     }
 
     //U
-    //No hace falta en el repository, se debe hacer desde el service
+    public User update(User user) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(user); // Actualizar la entidad en la base de datos
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+        return user;
+    }
 
     // D
     public boolean delete(String id) {
