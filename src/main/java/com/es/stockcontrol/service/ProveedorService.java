@@ -14,7 +14,7 @@ public class ProveedorService {
     }
 
     // C
-    public Proveedor create(Proveedor proveedor) throws IllegalArgumentException{ // asegurando los parametros
+    public Proveedor create(Proveedor proveedor) {
         // Lógica parámetros
         // Validar que el nombre y dirección no sean nulos o vacíos
         if (proveedor.getNombre() == null || proveedor.getNombre().trim().isEmpty()) {
