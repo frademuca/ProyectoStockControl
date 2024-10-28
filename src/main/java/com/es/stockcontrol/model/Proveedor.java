@@ -26,7 +26,7 @@ public class Proveedor {
 
     public Proveedor() {}
 
-    // sin el id puesto que se genera auto
+    // Sin el id puesto que se genera auto
     public Proveedor(String nombre, String direccion, List<Producto> productos) {
         this.nombre = nombre;
         this.direccion = direccion;
