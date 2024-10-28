@@ -47,29 +47,7 @@ public class UserRepository {
     }
 
     //U
-    public User update(User user){
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin(); // Iniciar la transacción
-            User existingUser = read(id);
-
-            if (existingUser != null) {
-                // Actualizar los campos del usuario
-                existingUser.setNombreUsuario(newName); // Cambiar el nombre
-                existingUser.setPassword(newPassword); // Cambiar la password
-
-                em.merge(existingUser); // Persistir los cambios en la base de datos
-                em.getTransaction().commit(); // Confirmar la transacción
-            } else {
-                System.out.println("Usuario no encontrado con el ID: " + id);
-            }
-        } catch (Exception e) {
-            em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
-            e.printStackTrace(); // Mostrar el error en la consola para depuración
-        } finally {
-            em.close(); // Cerrar el EntityManager
-        }
-    }
+    //No hace falta en el repository, se debe hacer desde el service
 
     // D
     public boolean delete(String id) {

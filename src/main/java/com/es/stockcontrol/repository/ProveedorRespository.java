@@ -13,21 +13,20 @@ public class ProveedorRespository {
     }
 
     // C
-    public boolean create(Proveedor proveedor) {
+    public Proveedor create(Proveedor proveedor) {
         EntityManager em = getEntityManager();
-        boolean isCreated = false; // Variable para indicar si la creación fue exitosa
         try {
             em.getTransaction().begin(); // Iniciar la transacción
             em.persist(proveedor); // Guardar la entidad en la base de datos
             em.getTransaction().commit(); // Confirmar la transacción
-            isCreated = true; // Si se llega aquí, la operación fue exitosa
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
             e.printStackTrace(); // Mostrar el error en la consola para depuración
+            return null;
         } finally {
             em.close(); // Cerrar el EntityManager
         }
-        return isCreated; // Devolver true si la creación fue exitosa, false si hubo error
+        return proveedor; // Devolver true si la creación fue exitosa, false si hubo error
     }
 
     // R x id
@@ -64,10 +63,7 @@ public class ProveedorRespository {
     }
 
     // U
-    public Proveedor update(Proveedor proveedor){
-
-    }
-
+    //No hace falta en el repository, se debe hacer desde el service
 
     // D
     public boolean delete(long id) {
@@ -83,7 +79,7 @@ public class ProveedorRespository {
                 em.getTransaction().commit(); // Confirmar la transacción
                 isDeleted = true; // Marcar como eliminado si la transacción es exitosa
             } else {
-                System.out.println("Usuario no encontrado con el ID: " + id);
+                System.out.println("Proveedor no encontrado con el ID: " + id);
             }
         } catch (Exception e) {
             em.getTransaction().rollback(); // Revertir la transacción si ocurre un error
