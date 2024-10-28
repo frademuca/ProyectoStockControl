@@ -41,6 +41,13 @@ public class Producto {
 
     public Producto() {}
 
+    public Producto(String id, String nombre, float precioSinIva, String descripcion, Proveedor proveedor) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precioSinIva = precioSinIva;
+        this.descripcion = descripcion;
+        this.proveedor = proveedor;
+    }
 
     public String getId() {
         return id;

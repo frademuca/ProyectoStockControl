@@ -4,6 +4,8 @@ import com.es.stockcontrol.model.Producto;
 import com.es.stockcontrol.repository.ProductoRepository;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // Lógica:
 // id: El id se compone por: 3 primeras letras de categoria + 3 primeras letras de nombre + 3 primeras letras de proveedor
@@ -100,5 +102,17 @@ public class ProductoService {
 
     private float calcularPrecioConIva(float precioSinIva) {
         return precioSinIva * (1 + IVA);
+    }
+
+    public List<Producto> getProductosConStock() {
+        return repository.findAll().stream()
+                .filter(producto -> producto.getStock() > 0)
+                .collect(Collectors.toList());
+    }
+
+    public List<Producto> getProductosSinStock() {
+        return repository.findAll().stream()
+                .filter(producto -> producto.getStock() == 0)
+                .collect(Collectors.toList());
     }
 }

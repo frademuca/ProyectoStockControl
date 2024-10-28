@@ -3,6 +3,9 @@ package com.es.stockcontrol.repository;
 import com.es.stockcontrol.model.Producto;
 import com.es.stockcontrol.utils.HibernateUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class ProductoRepository {
     public EntityManager getEntityManager() {
@@ -87,5 +90,22 @@ public class ProductoRepository {
             em.close(); // Cerrar el EntityManager
         }
         return isDeleted; // Devolver true si la eliminación fue exitosa, false si hubo error
+    }
+
+    public List<Producto> findAll() {
+        EntityManager em = getEntityManager();
+        List<Producto> productos = null;
+        try {
+            em.getTransaction().begin();
+            TypedQuery<Producto> query = em.createQuery("SELECT p FROM Producto p", Producto.class);
+            productos = query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return productos;
     }
 }
