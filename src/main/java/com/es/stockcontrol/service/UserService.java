@@ -20,6 +20,10 @@ public class UserService {
         UserRepository userRepository = new UserRepository();
         user = userRepository.read(username);
 
+        if (user == null) {
+            return false;
+        }
+
 
         // Comprobar que el username y la password coinciden con el obtenido de la base de datos
         if (user.getNombreUsuario().equals(username) && user.getPassword().equals(password)) {
