@@ -1,32 +1,41 @@
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+             version="3.0"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 
-    <!-- Unidad de Persistencia -->
+    <!-- CONFIGURACIÓN ESPECÍFICA PARA UNA BASE DE DATOS -->
     <persistence-unit name="configMYSQL" transaction-type="RESOURCE_LOCAL">
 
-        <!-- Qué clases queremos mapear -->
+        <!-- Proveedor de implementación JPA -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Clases para mapear al ORM -->
         <class>com.es.stockcontrol.model.Producto</class>
         <class>com.es.stockcontrol.model.Proveedor</class>
         <class>com.es.stockcontrol.model.User</class>
 
         <properties>
-            <!-- Qué BDD usar -->
+            <!-- Driver de la BBDD -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <!-- Dónde está la BASE DE DATOS -->
+
+            <!-- IP, Puerto y Nombre de la BBDD -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stockcontroldb" />
-            <!-- Credenciales -->
+
+            <!-- Credenciales de la BBDD -->
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="" />
 
-            <!-- Qué lenguaje de BBDD se usa -->
+            <!-- Dialecto de la BBDD -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+
             <!-- Muestra las consultas SQL de Hibernate por consola -->
             <property name="hibernate.show_sql" value="true" />
-            <!-- ¿Qué pasa cuando inicio la aplicación? -->
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+
+            <!-- Personalizar el proceso de generación del esquema de la base de datos de Hibernate -->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
         </properties>
 
     </persistence-unit>
+
 </persistence>
