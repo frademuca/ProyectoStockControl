@@ -14,27 +14,29 @@ public class ProveedorService {
     }
 
     // C
-    public Proveedor create(String nombre, String direccion) throws IllegalArgumentException{ // asegurando los parametros
+    public Proveedor create(Proveedor proveedor) throws IllegalArgumentException{ // asegurando los parametros
         // Lógica parámetros
         // Validar que el nombre y dirección no sean nulos o vacíos
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío o ser nulo.");
+        if (proveedor.getNombre() == null || proveedor.getNombre().trim().isEmpty()) {
+            System.out.println("Error: Nombre no válido.");
         }
-        if (direccion == null || direccion.trim().isEmpty()) {
-            throw new IllegalArgumentException("La dirección no puede estar vacía o ser nula.");
+        if (proveedor.getDireccion() == null || proveedor.getDireccion().trim().isEmpty()) {
+            System.out.println("Error: Dirección no válida.");
         }
-        if (nombre.length() > 50) {
-            throw new IllegalArgumentException("El nombre no puede superar los 50 caracteres.");
+        if (proveedor.getNombre().length() > 50) {
+            System.out.println("Error: Tamaño excedido.");
+            return null;
         }
 
         // Verificar si ya existe un proveedor con el mismo nombre
-        if (repository.read(nombre) != null) {
-            throw new IllegalArgumentException("Ya existe un proveedor con el nombre especificado.");
+        if (repository.read(proveedor.getNombre()) != null) {
+            System.out.println("Error: Ya existe un proveedor con el nombre especificado.");
+            return null;
         }
         // Crear y guardar el nuevo proveedor
         Proveedor newProveedor = new Proveedor();
-        newProveedor.setNombre(nombre);
-        newProveedor.setDireccion(direccion);
+        newProveedor.setNombre(proveedor.getNombre());
+        newProveedor.setDireccion(proveedor.getDireccion());
         return repository.create(newProveedor);
     }
 
@@ -55,8 +57,29 @@ public class ProveedorService {
     }
 
     // U
-//    public
+    public Proveedor update(Proveedor proveedor) {
+        // Comprobar que no sea null ni el que se pasa ni el de la BD
+        if (proveedor.getId() == 0 || repository.read(proveedor.getId()) == null) {
+            System.out.println("Error: El proveedor con el ID especificado no existe.");
+            return null;
+        }
+
+        // Validación de campos obligatorios
+        if (proveedor.getNombre() == null || proveedor.getNombre().trim().isEmpty() || proveedor.getNombre().length() > 50) {
+            System.out.println("Error: Nombre no válido.");
+            return null;
+        }
+        if (proveedor.getDireccion() == null || proveedor.getDireccion().trim().isEmpty()) {
+            System.out.println("Error: Dirección no válida.");
+            return null;
+        }
+
+        return repository.update(proveedor);
+    }
 
     // D
+    public boolean delete(long id){
+        return repository.delete(id);
+    }
 
 }
