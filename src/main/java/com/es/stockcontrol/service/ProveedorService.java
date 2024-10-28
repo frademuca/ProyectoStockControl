@@ -19,9 +19,11 @@ public class ProveedorService {
         // Validar que el nombre y dirección no sean nulos o vacíos
         if (proveedor.getNombre() == null || proveedor.getNombre().trim().isEmpty()) {
             System.out.println("Error: Nombre no válido.");
+            return null;
         }
         if (proveedor.getDireccion() == null || proveedor.getDireccion().trim().isEmpty()) {
             System.out.println("Error: Dirección no válida.");
+            return null;
         }
         if (proveedor.getNombre().length() > 50) {
             System.out.println("Error: Tamaño excedido.");
